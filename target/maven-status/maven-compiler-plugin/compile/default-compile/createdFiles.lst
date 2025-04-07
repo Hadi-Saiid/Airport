@@ -1,0 +1,8 @@
+com\mycompany\airport\Airplane.class
+com\mycompany\airport\AirportSystem.class
+com\mycompany\airport\Person.class
+com\mycompany\airport\CrewMember.class
+com\mycompany\airport\Passenger.class
+com\mycompany\airport\Flight.class
+com\mycompany\airport\Airport.class
+com\mycompany\airport\Ticket.class
