@@ -5,7 +5,7 @@ public class Airplane {
     private final int seats;
     private String airline;
     private int airplaneNumber; //1 2 3 4 5
-
+// yousef
     public int getAirplaneNumber() {
         return airplaneNumber;
     }
