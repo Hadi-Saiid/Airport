@@ -4,18 +4,11 @@ public class Airplane {
     private String model;
     private final int seats;
     private String airline;
-    private int airplaneNumber; //1 2 3 4 5
 // yousef
 // 2nd change
-    public int getAirplaneNumber() {
-        System.out.println("hello yousef");
-        return airplaneNumber;
-    }
 
-    public void setAirplaneNumber(int airplaneNumber) {
-        this.airplaneNumber = airplaneNumber;
-    }
-    
+
+//Test
     public Airplane(){
         seats=120;
     }
