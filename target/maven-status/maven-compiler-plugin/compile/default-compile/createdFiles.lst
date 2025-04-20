@@ -3,6 +3,14 @@ com\mycompany\airport\AirportSystem.class
 com\mycompany\airport\Person.class
 com\mycompany\airport\CrewMember.class
 com\mycompany\airport\Passenger.class
+com\mycompany\airport\DashBoard$1.class
+com\mycompany\airport\DashBoard$8.class
 com\mycompany\airport\Flight.class
+com\mycompany\airport\DashBoard$3.class
+com\mycompany\airport\DashBoard$6.class
+com\mycompany\airport\DashBoard$2.class
+com\mycompany\airport\DashBoard$7.class
+com\mycompany\airport\DashBoard$4.class
+com\mycompany\airport\DashBoard$5.class
 com\mycompany\airport\Airport.class
-com\mycompany\airport\Ticket.class
+com\mycompany\airport\DashBoard.class

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class AirportSystem {
     public static void main(String[] args) {
-        Airport a1=new Airport("Lebanon");
+        Airport a1=new Airport();
         Scanner inp=new Scanner(System.in);
         Airplane A1=new Airplane();
         System.out.print("Enter the airline of the airplane: ");
@@ -57,7 +57,6 @@ public class AirportSystem {
         f1.setFlight_id(ID);
         f1.addPassenger(p1);
         f1.addCrewMembers(c1);
-        f1.Pick_Airplane(A1);
         System.out.println(f1);
     }
 }

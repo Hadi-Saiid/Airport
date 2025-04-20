@@ -2,9 +2,10 @@ package com.mycompany.airport;
 
 public class Passenger extends Person{
     //name  id
-    public Passenger(String name,String id_card){
-        super(name , id_card);
+    public Passenger(String name,String ID){
+        super(name,ID);
     }
+    
     public void setPassenger_Name(String name){
         setName(this.name=name);
     }

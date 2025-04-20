@@ -1,7 +1,6 @@
 package com.mycompany.airport;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Flight {
     private String flight_id;
@@ -10,14 +9,12 @@ public class Flight {
     private ArrayList<Passenger> passengers = new ArrayList<>();
     private ArrayList<CrewMember> crewmembers = new ArrayList<>();
     private Airplane airplane;
-    private Airport airport;
 
-    public Airport getAirport() {
-        return airport;
-    }
-
-    public void setAirport(Airport airport) {
-        this.airport = airport;
+    public Flight(String flight_id, String departure_time, String destination, Airplane airplane) {
+        this.flight_id = flight_id;
+        this.departure_time = departure_time;
+        this.destination = destination;
+        this.airplane =airplane;
     }
    
     public Flight(){
@@ -34,12 +31,17 @@ public class Flight {
     public void setFlight_destination(String destination){
         this.destination=destination;
     }
-    public void Pick_Airplane(Airplane air){
-        for(int i=0 ;i<airport.getAirplanes();i++){
-            if(air.equals(airplane.getAirplaneNumber())){
-                this.airplane=air;
-            }
-        }
+
+    public String getFlight_id() {
+        return flight_id;
+    }
+
+    public Airplane getAirplane() {
+        return airplane;
+    }
+
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
     }
     public void addPassenger(Passenger passenger){
         passengers.add(passenger);
