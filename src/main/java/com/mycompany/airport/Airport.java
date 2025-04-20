@@ -1,7 +1,6 @@
 package com.mycompany.airport;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Airport {
     String name_airport="BHY Airport";
