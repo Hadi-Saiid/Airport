@@ -1,23 +1,16 @@
 package com.mycompany.airport;
 
 public class Passenger extends Person{
-    //name  id
-    public Passenger(String name,String ID){
-        super(name,ID);
+    String travelClass;
+    String disabilityType;
+    boolean isDisabled;
+    public Passenger(String name,String ID,String nationality,String gender,String travelClass,boolean isDisabled,String disabilityType){
+        super(name,ID,nationality,gender);
+        this.travelClass=travelClass;
+        this.disabilityType=disabilityType;
+        this.isDisabled=isDisabled;
     }
-    
-    public void setPassenger_Name(String name){
-        setName(this.name=name);
-    }
-    public void Name(){
-        getName();
-    }
-    public void setPassenger_ID(String ID){
-        setId_Card(this.id_card=ID);
-    }
-    public void ID(){
-        getId_Card();
-    }
+
     @Override
     public String toString() {
         return "Passenger [name: "+ name +" id : "+id_card+"]";

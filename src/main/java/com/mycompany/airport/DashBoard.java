@@ -1,18 +1,75 @@
 package com.mycompany.airport;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;    
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 public class DashBoard extends javax.swing.JFrame {
 
     public DashBoard() {
         initComponents();
+        String[] countries = {
+        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria",
+        "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
+        "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso",
+        "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile",
+        "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
+        "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador",
+        "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
+        "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau",
+        "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland",
+        "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+        "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein",
+        "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+        "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco",
+        "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger",
+        "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman","Palastine", "Pakistan", "Palau", "Panama",
+        "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia",
+        "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino",
+        "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
+        "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain",
+        "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania",
+        "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda",
+        "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu",
+        "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        };
+        String [] classes={"Economy","Business","First Class"};
+        String[] times = {"12:00 PM", "12:30 PM","1:00 PM", "1:30 PM","2:00 PM", "2:30 PM", 
+                          "3:00 PM", "3:30 PM","4:00 PM", "4:30 PM","5:00 PM", "5:30 PM", 
+                          "6:00 PM", "6:30 PM","7:00 PM", "7:30 PM","8:00 PM", "8:30 PM", 
+                          "9:00 PM", "9:30 PM","10:00 PM", "10:30 PM","11:00 PM", "11:30 PM",
+                          "12:00 AM", "12:30 AM","1:00 AM", "1:30 AM","2:00 AM", "2:30 AM",
+                          "3:00 AM", "3:30 AM","4:00 AM", "4:30 AM","5:00 AM", "5:30 AM",
+                          "6:00 AM", "6:30 AM", "7:00 AM", "7:30 AM","8:00 AM", "8:30 AM",
+                          "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM","11:00 AM",
+                          "11:30 AM","12:00 PM"};
+        
+        Arrays.sort(countries);
+        Arrays.sort(classes);
+        
+        for (String country : countries) {
+            CrewMemberNationalityComboBox.addItem(country);
+            NationalityChooser.addItem(country);
+            DestinationBox.addItem(country);
+        }
+        for(String Class : classes){
+            TravelClassChooser.addItem(Class);
+        }
+        for (String time : times) {
+            DepartureTimeBox.addItem(time);
+        }
     }
-    //a.setPassengerName(getText); 
-    //Airport airport
-    //Temprory Airplane airplane 
-    Airport airport=new Airport(); 
 
+    Airport airport=new Airport(); 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -22,6 +79,10 @@ public class DashBoard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Disability_Group = new javax.swing.ButtonGroup();
+        Gender_Group_P = new javax.swing.ButtonGroup();
+        Gender_Group_C = new javax.swing.ButtonGroup();
+        Role_Group = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -33,26 +94,76 @@ public class DashBoard extends javax.swing.JFrame {
         AirplaneCodeTF = new javax.swing.JTextField();
         NbOfSeatsTF = new javax.swing.JTextField();
         AddAirplane = new javax.swing.JButton();
-        RemoveAirplane = new javax.swing.JButton();
+        AirplaneRemove = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         DisplayAirplaneTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        AirplaneTABLE = new javax.swing.JTable();
         FilghtIDTF = new javax.swing.JTextField();
-        DepartureTimeTF = new javax.swing.JTextField();
-        DestinationTF = new javax.swing.JTextField();
         AddFlight = new javax.swing.JButton();
         RemoveFlight = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         FlightTABLE = new javax.swing.JTable();
+        AirplaneBox = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        DestinationBox = new javax.swing.JComboBox<>();
+        DepartureTimeBox = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        CrewMemberAddButton = new javax.swing.JButton();
+        CrewMemberRemoveButton = new javax.swing.JButton();
+        CrewMemberNationalityComboBox = new javax.swing.JComboBox<>();
+        CrewMemberNameTF = new javax.swing.JTextField();
+        CrewMemberPassportNumberTF = new javax.swing.JTextField();
+        CrewMemberMaleRadioButton = new javax.swing.JRadioButton();
+        CrewMemberFemaleRadioButton = new javax.swing.JRadioButton();
+        PilotRadioButton = new javax.swing.JRadioButton();
+        AttendentRadioButton = new javax.swing.JRadioButton();
+        jLabel22 = new javax.swing.JLabel();
+        FlightBox = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        CrewMemberInfoTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        PassengerAdd = new javax.swing.JButton();
+        PassengerRemove = new javax.swing.JButton();
+        NameOfPassengerTf = new javax.swing.JTextField();
+        PassportOfPassengerTf = new javax.swing.JTextField();
+        DisabilityTF = new javax.swing.JTextField();
+        YesButton = new javax.swing.JRadioButton();
+        NoButton = new javax.swing.JRadioButton();
+        Male = new javax.swing.JRadioButton();
+        Female = new javax.swing.JRadioButton();
+        NationalityChooser = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        DisplayPassengerTable = new javax.swing.JTable();
+        jLabel15 = new javax.swing.JLabel();
+        FlightBoxPassenger = new javax.swing.JComboBox<>();
+        TravelClassChooser = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DashBoard");
+        setMinimumSize(new java.awt.Dimension(900, 462));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Model");
 
@@ -69,10 +180,11 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
-        RemoveAirplane.setText("Remove");
-        RemoveAirplane.addActionListener(new java.awt.event.ActionListener() {
+        AirplaneRemove.setText("Remove");
+        AirplaneRemove.setMaximumSize(new java.awt.Dimension(150, 40));
+        AirplaneRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RemoveAirplaneActionPerformed(evt);
+                AirplaneRemoveActionPerformed(evt);
             }
         });
 
@@ -92,6 +204,7 @@ public class DashBoard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        DisplayAirplaneTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(DisplayAirplaneTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -99,58 +212,57 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(55, 55, 55))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(AddAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(AirlineTF, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                        .addComponent(ModelTF)
-                        .addComponent(AirplaneCodeTF)
-                        .addComponent(NbOfSeatsTF))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(RemoveAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AddAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ModelTF, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AirlineTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(NbOfSeatsTF, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AirplaneCodeTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                    .addComponent(AirplaneRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(105, 105, 105)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(ModelTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(AirlineTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(AirplaneCodeTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NbOfSeatsTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RemoveAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ModelTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(AirlineTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(AirplaneCodeTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(NbOfSeatsTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AddAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AirplaneRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(80, 80, 80))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
 
         jTabbedPane1.addTab("Airplane", jPanel1);
@@ -160,24 +272,6 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel6.setText("Departure Time");
 
         jLabel7.setText("Destination");
-
-        AirplaneTABLE.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Airplane"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(AirplaneTABLE);
 
         AddFlight.setText("Add");
         AddFlight.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +303,16 @@ public class DashBoard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        FlightTABLE.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(FlightTABLE);
+
+        AirplaneBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AirplaneBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("Airplane");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -217,79 +320,368 @@ public class DashBoard extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DepartureTimeTF, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DestinationTF, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FilghtIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel16))
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AirplaneBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(FilghtIDTF, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(DestinationBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(DepartureTimeBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(AddFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(RemoveFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116)))
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addComponent(RemoveFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(FilghtIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(DepartureTimeTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(DestinationTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(77, 77, 77)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RemoveFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(FilghtIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(DepartureTimeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(DestinationBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AirplaneBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(73, 73, 73)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RemoveFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Flight", jPanel2);
+
+        jLabel17.setText("Name");
+
+        jLabel18.setText("Nationality");
+
+        jLabel19.setText("Passport ID");
+
+        jLabel20.setText("Gender");
+
+        jLabel21.setText("Role");
+
+        CrewMemberAddButton.setText("Add");
+        CrewMemberAddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrewMemberAddButtonActionPerformed(evt);
+            }
+        });
+
+        CrewMemberRemoveButton.setText("Remove");
+        CrewMemberRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrewMemberRemoveButtonActionPerformed(evt);
+            }
+        });
+
+        CrewMemberNameTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrewMemberNameTFActionPerformed(evt);
+            }
+        });
+
+        Gender_Group_C.add(CrewMemberMaleRadioButton);
+        CrewMemberMaleRadioButton.setText("Male");
+
+        Gender_Group_C.add(CrewMemberFemaleRadioButton);
+        CrewMemberFemaleRadioButton.setText("Female");
+
+        Role_Group.add(PilotRadioButton);
+        PilotRadioButton.setText("Pilot");
+
+        Role_Group.add(AttendentRadioButton);
+        AttendentRadioButton.setText("Attendent");
+
+        jLabel22.setText("Flight");
+
+        CrewMemberInfoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Nationality", "Passport ID", "Gender", "Role", "Flight"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        CrewMemberInfoTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(CrewMemberInfoTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(79, 79, 79)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(CrewMemberMaleRadioButton)
+                                .addGap(41, 41, 41)
+                                .addComponent(CrewMemberFemaleRadioButton))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(PilotRadioButton)
+                                .addGap(43, 43, 43)
+                                .addComponent(AttendentRadioButton))
+                            .addComponent(FlightBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CrewMemberPassportNumberTF)
+                            .addComponent(CrewMemberNameTF)
+                            .addComponent(CrewMemberNationalityComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(CrewMemberAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CrewMemberRemoveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(CrewMemberNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(CrewMemberNationalityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(CrewMemberPassportNumberTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(CrewMemberMaleRadioButton)
+                    .addComponent(CrewMemberFemaleRadioButton))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PilotRadioButton)
+                    .addComponent(AttendentRadioButton)
+                    .addComponent(jLabel21))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(FlightBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CrewMemberAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CrewMemberRemoveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
         );
 
         jTabbedPane1.addTab("CrewMembers", jPanel3);
+
+        jLabel8.setText("Name");
+
+        jLabel9.setText("Passport ID");
+
+        jLabel10.setText("Nationality");
+
+        jLabel11.setText("Gender");
+
+        jLabel12.setText("Travel Class");
+
+        jLabel13.setText("Any disability");
+
+        jLabel14.setText("Add your disability");
+
+        PassengerAdd.setText("Add");
+        PassengerAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PassengerAddActionPerformed(evt);
+            }
+        });
+
+        PassengerRemove.setText("Remove");
+        PassengerRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PassengerRemoveActionPerformed(evt);
+            }
+        });
+
+        NameOfPassengerTf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameOfPassengerTfActionPerformed(evt);
+            }
+        });
+
+        DisabilityTF.setEnabled(false);
+        DisabilityTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DisabilityTFActionPerformed(evt);
+            }
+        });
+
+        Disability_Group.add(YesButton);
+        YesButton.setText("Yes");
+        YesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YesButtonActionPerformed(evt);
+            }
+        });
+
+        Disability_Group.add(NoButton);
+        NoButton.setText("No");
+        NoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NoButtonActionPerformed(evt);
+            }
+        });
+
+        Gender_Group_P.add(Male);
+        Male.setText("Male");
+
+        Gender_Group_P.add(Female);
+        Female.setText("Female");
+
+        DisplayPassengerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Passport ID", "Nationality", "Gender", "Travel Class", "Flight", "Disabled", "Disabled type"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        DisplayPassengerTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(DisplayPassengerTable);
+
+        jLabel15.setText("Flight");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13))
+                                .addGap(73, 73, 73)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(Male)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                                        .addComponent(Female))
+                                    .addComponent(PassportOfPassengerTf, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(NameOfPassengerTf, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(NationalityChooser, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TravelClassChooser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(FlightBoxPassenger, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addComponent(YesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(NoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(DisabilityTF))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(PassengerAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PassengerRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NameOfPassengerTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(PassportOfPassengerTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(NationalityChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(Female)
+                    .addComponent(Male))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TravelClassChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(FlightBoxPassenger, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(YesButton)
+                            .addComponent(NoButton)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(DisabilityTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(118, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PassengerAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PassengerRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37))))
+            .addComponent(jScrollPane4)
         );
 
         jTabbedPane1.addTab("Passengers", jPanel4);
@@ -298,38 +690,48 @@ public class DashBoard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RemoveAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveAirplaneActionPerformed
+    private void AirplaneRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirplaneRemoveActionPerformed
 
         DefaultTableModel tableModel=(DefaultTableModel)DisplayAirplaneTable.getModel();
-        DefaultTableModel tableMode = (DefaultTableModel) AirplaneTABLE.getModel();
+        
         int selectedRowIndex=DisplayAirplaneTable.getSelectedRow();
         Airplane airplane=airport.getAirplaneIndex(selectedRowIndex);
+        
         if(selectedRowIndex<0){
             JOptionPane.showMessageDialog(this, "No Row selected!");
+            return;
         }
+        
         if(!airplane.isAvailable()){
             JOptionPane.showMessageDialog(this, "Airplane is assigned to a Flight!");
             return;
         }
+        
         else{
-            tableMode.removeRow(selectedRowIndex);
+            AirplaneBox.removeItemAt(selectedRowIndex);
             tableModel.removeRow(selectedRowIndex);
             airport.RemoveAirPlane(selectedRowIndex);
             JOptionPane.showMessageDialog(this, "Airplane removed successfully.");
         }
-    }//GEN-LAST:event_RemoveAirplaneActionPerformed
+    }//GEN-LAST:event_AirplaneRemoveActionPerformed
 
     private void AddAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAirplaneActionPerformed
+        
         String model=ModelTF.getText();
         String numOfSeats=NbOfSeatsTF.getText();
         String airplaneCode=AirplaneCodeTF.getText();
@@ -339,50 +741,80 @@ public class DashBoard extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
         }
+        
+        if(isPurelyNumeric(model)||isPurelyNumeric(airline)){
+           JOptionPane.showMessageDialog(this, "models and airlines cannot be numbers only!");
+           return;
+        }
+        
         try {
             if(Integer.parseInt(NbOfSeatsTF.getText())<0){
                 JOptionPane.showMessageDialog(this, "Number of seats must be a valid number.");
                 return;
             }
+            
             if(airport.TestDuplicateAirplaneID(airplaneCode)){
                 JOptionPane.showMessageDialog(this, "Airplane Code is already used!");
                 return;
             }
+            
             Airplane a = new Airplane(model, Integer.parseInt(NbOfSeatsTF.getText()), airline, airplaneCode,true);
             airport.addAirPlane(a);
 
             DefaultTableModel tableModel = (DefaultTableModel) DisplayAirplaneTable.getModel();
             
             tableModel.addRow(new Object[]{model, numOfSeats, airline,airplaneCode});
-            
-            DefaultTableModel tableMode = (DefaultTableModel) AirplaneTABLE.getModel();
-            
-            tableMode.addRow(new Object[]{airplaneCode});
+            AirplaneBox.addItem(airplaneCode);
             
  
             ModelTF.setText("");
             NbOfSeatsTF.setText("");
             AirplaneCodeTF.setText("");
             AirlineTF.setText("");
-
+            System.out.println(airport.toString());
+            
         } catch (NumberFormatException e ) {
             JOptionPane.showMessageDialog(this, "Number of seats must be a valid number.");
         }
     }//GEN-LAST:event_AddAirplaneActionPerformed
 
     private void RemoveFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveFlightActionPerformed
-        DefaultTableModel tableModel=(DefaultTableModel)FlightTABLE.getModel();
+        DefaultTableModel flightTable=(DefaultTableModel)FlightTABLE.getModel();
+        DefaultTableModel crewTable = (DefaultTableModel) CrewMemberInfoTable.getModel();
+        DefaultTableModel passengerTable = (DefaultTableModel) DisplayPassengerTable.getModel();
+        
         int selectedRowIndex=FlightTABLE.getSelectedRow();
+        Flight flight=airport.getFlightIndex(selectedRowIndex);
+        String flightID =flight.getFlight_id();
+        Airplane airplane=flight.getAirplane();
         
         if(selectedRowIndex<0){
             JOptionPane.showMessageDialog(this, "No Row selected!");
         }
         else{
-            Flight flight=airport.getFlightIndex(selectedRowIndex);
-            Airplane airplane=flight.getAirplane();
+
             airplane.setAvailable(true);
-            tableModel.removeRow(selectedRowIndex);
+            
+            for (int i = passengerTable.getRowCount() - 1; i >= 0; i--) {
+                if (passengerTable.getValueAt(i, 5).toString().equals(flightID)) { 
+                    passengerTable.removeRow(i);
+                }
+            }
+            
+            for (int i = crewTable.getRowCount() - 1; i >= 0; i--) {
+                String flight_id=(String) crewTable.getValueAt(i, 5);
+                if (flight_id.equals(flightID)) { 
+                    crewTable.removeRow(i);
+                }
+            }
+            
+            flight.clearCrewMembers();
+            flight.clearPassengers();
+            
+            flightTable.removeRow(selectedRowIndex);
             airport.RemoveFlight(selectedRowIndex);
+            FlightBox.removeItemAt(selectedRowIndex);
+            FlightBoxPassenger.removeItemAt(selectedRowIndex);
             JOptionPane.showMessageDialog(this, "Flight removed successfully.");
         }
     }//GEN-LAST:event_RemoveFlightActionPerformed
@@ -390,41 +822,496 @@ public class DashBoard extends javax.swing.JFrame {
     private void AddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFlightActionPerformed
 
         String flight_ID=FilghtIDTF.getText();
-        String departure_Time=DepartureTimeTF.getText();
-        String destination=DestinationTF.getText();
-        int selectedRowIndex=AirplaneTABLE.getSelectedRow();
-        DefaultTableModel tableMode = (DefaultTableModel) AirplaneTABLE.getModel();
+        String departure_Time=DepartureTimeBox.getSelectedItem().toString();
+        String destination=DestinationBox.getSelectedItem().toString();
+        
+        int selectedRowIndex=AirplaneBox.getSelectedIndex();
+        Airplane airplane =airport.getAirplaneIndex(selectedRowIndex);
+        
         if (flight_ID.isEmpty() || departure_Time.isEmpty() ||destination.isEmpty() ) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
         }
+        
         if(selectedRowIndex<0){
             JOptionPane.showMessageDialog(this, "No airplane is selceted!");
             return;
         }
-        Airplane airplane =new Airplane();
-        airplane=airport.getAirplaneIndex(selectedRowIndex);
+
         if(!airplane.isAvailable()){
             JOptionPane.showMessageDialog(this, "Airplane is not available!");
             return;
         }
+        
         if(airport.TestDuplicateFlightID(flight_ID)){
             JOptionPane.showMessageDialog(this, "Flight ID is already used!");
             return;
         }
-        else{  
-            airplane=airport.getAirplaneIndex(selectedRowIndex); 
-        }
+        
         airplane.setAvailable(false);
         Flight f = new Flight(flight_ID, departure_Time, destination,airplane);
         airport.addFlight(f);
+        
         DefaultTableModel tableModel = (DefaultTableModel) FlightTABLE.getModel();
         tableModel.addRow(new Object[]{flight_ID, departure_Time, destination,airplane.getAirplaneCode()});
+        
+        FlightBox.addItem(flight_ID);
+        FlightBoxPassenger.addItem(flight_ID);
         FilghtIDTF.setText("");
-        DepartureTimeTF.setText("");
-        DestinationTF.setText("");
+        DepartureTimeBox.setSelectedIndex(0);
+        DestinationBox.setSelectedIndex(0);
     }//GEN-LAST:event_AddFlightActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+        DefaultTableModel airplane_table = (DefaultTableModel) DisplayAirplaneTable.getModel();
+        Vector<Vector> tableData_airplane=airplane_table.getDataVector();
+        
+        DefaultComboBoxModel<String> airplane_box = (DefaultComboBoxModel<String>) AirplaneBox.getModel();
+
+        List<String> comboBoxData_airplane = new ArrayList<>();
+
+        for (int i = 0; i < airplane_box.getSize(); i++) {
+            comboBoxData_airplane.add(airplane_box.getElementAt(i));
+        }
+        
+        DefaultTableModel flight_table = (DefaultTableModel) FlightTABLE.getModel();
+        Vector<Vector> tableData_flight=flight_table.getDataVector();
+        
+        DefaultComboBoxModel<String> flight_box = (DefaultComboBoxModel<String>) FlightBox.getModel();
+        List<String> comboBoxData_flight = new ArrayList<>();
+        for (int i = 0; i < flight_box.getSize(); i++) {
+            comboBoxData_flight.add(flight_box.getElementAt(i));
+        }
+        
+        DefaultTableModel crew_table = (DefaultTableModel) CrewMemberInfoTable.getModel();
+        Vector<Vector> tableData_crew=crew_table.getDataVector();
+        
+        DefaultTableModel passenger_table = (DefaultTableModel) DisplayPassengerTable.getModel();
+        Vector<Vector> tableData_passenger=passenger_table.getDataVector();
+        
+        try{
+            FileOutputStream airplane_file = new FileOutputStream("airplane.bin");
+            ObjectOutputStream airplane_output=new ObjectOutputStream(airplane_file);
+            
+            airplane_output.writeObject(tableData_airplane);
+            airplane_output.close();
+            airplane_file.close();
+            
+            FileOutputStream airplaneID_file = new FileOutputStream("airplaneID.bin");
+            ObjectOutputStream airplaneID_output=new ObjectOutputStream(airplaneID_file);
+            
+            airplaneID_output.writeObject(comboBoxData_airplane);
+            airplaneID_output.close();
+            airplaneID_file.close();
+            
+            FileOutputStream flight_file = new FileOutputStream("flight.bin");
+            ObjectOutputStream flight_output=new ObjectOutputStream(flight_file);
+            
+            flight_output.writeObject(tableData_flight);
+            flight_output.close();
+            flight_file.close();
+            
+            FileOutputStream flightID_file = new FileOutputStream("flightID.bin");
+            ObjectOutputStream flightID_output=new ObjectOutputStream(flightID_file);
+            
+            flightID_output.writeObject(comboBoxData_flight);
+            flightID_output.close();
+            flightID_file.close();
+            
+            FileOutputStream crew_file = new FileOutputStream("crew.bin");
+            ObjectOutputStream crew_output=new ObjectOutputStream(crew_file);
+            
+            crew_output.writeObject(tableData_crew);
+            crew_output.close();
+            crew_file.close();
+            
+            FileOutputStream passenger_file = new FileOutputStream("passenger.bin");
+            ObjectOutputStream passenger_output=new ObjectOutputStream(passenger_file);
+            
+            passenger_output.writeObject(tableData_passenger);
+            passenger_output.close();
+            passenger_file.close();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try{
+            FileInputStream airplane_file=new FileInputStream("airplane.bin");
+            ObjectInputStream input_airplane=new ObjectInputStream(airplane_file);
+            
+            Vector<Vector> tableData_airplane=(Vector<Vector>)input_airplane.readObject();
+            
+            input_airplane.close();
+            airplane_file.close();
+            
+            DefaultTableModel airplane_table = (DefaultTableModel) DisplayAirplaneTable.getModel();
+            for(int i=0;i<tableData_airplane.size();i++){
+                Vector row=tableData_airplane.get(i);
+                airplane_table.addRow(new Object[]{row.get(0),row.get(1),row.get(2),row.get(3)});
+                
+            }
+            for(int i=0;i<tableData_airplane.size();i++){
+                String model=(String) airplane_table.getValueAt(i, 0);
+                String seats=(String) airplane_table.getValueAt(i, 1);
+                String airline=(String) airplane_table.getValueAt(i, 2);
+                String airplane_code=(String) airplane_table.getValueAt(i, 3);
+                Airplane airplane=new Airplane(model,Integer.parseInt(seats),airline,airplane_code,true);
+                airport.addAirPlane(airplane);
+            }
+            
+            FileInputStream airplaneID_file=new FileInputStream("airplaneID.bin");
+            ObjectInputStream input_airplaneID=new ObjectInputStream(airplaneID_file);
+            
+            ArrayList<String> airplaneID_Data = (ArrayList<String>) input_airplaneID.readObject();
+            
+            input_airplaneID.close();
+            airplaneID_file.close();
+          
+            for (String airplane : airplaneID_Data) {
+                AirplaneBox.addItem(airplane);
+            }
+            FileInputStream flight_file=new FileInputStream("flight.bin");
+            ObjectInputStream input_flight=new ObjectInputStream(flight_file);
+            
+            Vector<Vector> tableData_flight=(Vector<Vector>)input_flight.readObject();
+            
+            input_flight.close();
+            flight_file.close();
+            
+            DefaultTableModel flight_table = (DefaultTableModel) FlightTABLE.getModel();
+            for(int i=0;i<tableData_flight.size();i++){
+                Vector row=tableData_flight.get(i);
+                flight_table.addRow(new Object[]{row.get(0),row.get(1),row.get(2),row.get(3)});
+                
+            }
+            for(int i=0;i<tableData_flight.size();i++){
+                String flight_id=(String) flight_table.getValueAt(i, 0);
+                String departure_time=(String) flight_table.getValueAt(i, 1);
+                String destination=(String) flight_table.getValueAt(i, 2);
+                String airplane_id=(String) flight_table.getValueAt(i, 3);
+                Airplane airplane=airport.Airplane_By_ID(airplane_id);
+                airplane.setAvailable(false);
+                Flight flight=new Flight(flight_id,departure_time,destination,airplane);
+                flight.clearCrewMembers();
+                airport.addFlight(flight);
+            
+            }
+            FileInputStream flightID_file=new FileInputStream("flightID.bin");
+            ObjectInputStream input_flightID=new ObjectInputStream(flightID_file);
+            
+            ArrayList<String> flightID_Data = (ArrayList<String>) input_flightID.readObject();
+            
+            input_flightID.close();
+            flightID_file.close();
+          
+            for (String flight : flightID_Data) {
+                FlightBox.addItem(flight);
+            }
+            for (String flight : flightID_Data) {
+                FlightBoxPassenger.addItem(flight);
+            }
+            FileInputStream crew_file=new FileInputStream("crew.bin");
+            ObjectInputStream input_crew=new ObjectInputStream(crew_file);
+            
+            Vector<Vector> tableData_crew=(Vector<Vector>)input_crew.readObject();
+            
+            input_crew.close();
+            crew_file.close();
+            
+            DefaultTableModel crew_table = (DefaultTableModel) CrewMemberInfoTable.getModel();
+            for(int i=0;i<tableData_crew.size();i++){
+                Vector row=tableData_crew.get(i);
+                crew_table.addRow(new Object[]{row.get(0),row.get(1),row.get(2),row.get(3),row.get(4),row.get(5)});
+            }
+            for(int i=0;i<tableData_crew.size();i++){
+                String name=(String) crew_table.getValueAt(i, 0);
+                String nationality=(String) crew_table.getValueAt(i, 1);
+                String passport_id=(String) crew_table.getValueAt(i, 2);
+                String gender=(String) crew_table.getValueAt(i, 3);
+                String role=(String) crew_table.getValueAt(i, 4);
+                String flight_id=(String) crew_table.getValueAt(i, 5);
+                Flight flights=airport.Flight_By_ID(flight_id);
+                if(role.equals("Pilot")){
+                    flights.CalculateCurrentPilots();
+                }
+                else{
+                    flights.CalculateCurrentAttendants();
+                }
+                
+                CrewMember crew=new CrewMember(role,name,nationality,passport_id,gender);
+                flights.addCrewMembers(crew);
+            }
+            
+            
+            FileInputStream passenger_file=new FileInputStream("passenger.bin");
+            ObjectInputStream input_passenger=new ObjectInputStream(passenger_file);
+            
+            Vector<Vector> tableData_passenger=(Vector<Vector>)input_passenger.readObject();
+            
+            input_passenger.close();
+            passenger_file.close();
+            
+            DefaultTableModel passenger_table = (DefaultTableModel) DisplayPassengerTable.getModel();
+            for(int i=0;i<tableData_passenger.size();i++){
+                Vector row=tableData_passenger.get(i);
+                passenger_table.addRow(new Object[]{row.get(0),row.get(1),row.get(2),row.get(3),row.get(4),row.get(5),row.get(6),row.get(7)});
+            }
+            for(int i=0;i<tableData_passenger.size();i++){
+                String name=(String) passenger_table.getValueAt(i, 0);
+                String passport_id=(String) passenger_table.getValueAt(i, 1);
+                String nationality=(String) passenger_table.getValueAt(i, 2);
+                String gender=(String) passenger_table.getValueAt(i, 3);
+                String travel_class=(String) passenger_table.getValueAt(i, 4);
+                String flight_id=(String) passenger_table.getValueAt(i, 5);
+                Flight flights=airport.Flight_By_ID(flight_id);
+                String disabled=(String) passenger_table.getValueAt(i, 6);
+                boolean isdisabled;
+                if(disabled.equals("Yes")){
+                    isdisabled=true;
+                }
+                else{
+                    isdisabled=false;
+                }
+                String disabled_type=(String) passenger_table.getValueAt(i, 7);
+                
+                flights.CalculateCurrentPassengers();
+                
+                Passenger passenger=new Passenger(name,passport_id,nationality,gender,travel_class,isdisabled,disabled_type);
+                flights.addPassenger(passenger);
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void PassengerAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassengerAddActionPerformed
+        
+        String name=NameOfPassengerTf.getText();
+        String passportId=PassportOfPassengerTf.getText();
+        String nationality=NationalityChooser.getSelectedItem().toString();
+        String gender="";
+        String disabilityType="";
+        boolean isDisabled=false;
+        
+        int selectedRowIndex=FlightBoxPassenger.getSelectedIndex();
+        String flight_id=FlightBoxPassenger.getItemAt(selectedRowIndex);
+        
+        if(Female.isSelected()){
+            gender="Female";
+        }
+        else if(Male.isSelected()){
+            gender="Male";
+        }
+        String travelClass=TravelClassChooser.getSelectedItem().toString();
+        if(YesButton.isSelected()){
+            disabilityType=DisabilityTF.getText();
+            isDisabled=true;
+        }
+        else{
+            isDisabled=false;
+            disabilityType="N/A";
+        }
+        if(name.isEmpty()|| passportId.isEmpty()||nationality.isEmpty()||gender.isEmpty()||(isDisabled && disabilityType.isEmpty())||travelClass.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            return;
+        }
+        else if(isPurelyNumeric(name)||isPurelyNumeric(disabilityType)){
+            JOptionPane.showMessageDialog(this, "Make sure to enter valid values");
+            return;
+        }
+        else if(selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "No Flight is selceted!");
+            return;
+        }
+        else{
+            Flight flights=airport.Flight_By_ID(flight_id);
+            if(flights.TestDuplicatePassengerID(passportId)){
+                JOptionPane.showMessageDialog(this, "Cant have duplicate ID!");
+                return;
+            }
+            int count=flights.getCurrent_passengers();
+            Passenger passenger=new Passenger(name,passportId,nationality, gender, travelClass, isDisabled, disabilityType);
+            if(flights.getAirplane().getSeats()<=count){
+                JOptionPane.showMessageDialog(this, "You have reached the maximum number of passengers!");
+                flights.removePassenger(passenger);
+            return;
+            }
+            
+            flights.addPassenger(passenger);
+            flights.CalculateCurrentPassengers();
+            
+            DefaultTableModel tableModel = (DefaultTableModel) DisplayPassengerTable.getModel();
+            tableModel.addRow(new Object[]{name, passportId, nationality, gender,travelClass,flights.getFlight_id(),(isDisabled?"Yes":"No"),disabilityType});
+            
+            NameOfPassengerTf.setText("");
+            PassportOfPassengerTf.setText("");
+            NationalityChooser.setSelectedIndex(0);
+            TravelClassChooser.setSelectedIndex(0);
+            Gender_Group_P.clearSelection();
+            Disability_Group.clearSelection();
+            DisabilityTF.setText("");
+            DisabilityTF.setEnabled(false);
+        }
+    }//GEN-LAST:event_PassengerAddActionPerformed
+
+    private void NameOfPassengerTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameOfPassengerTfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameOfPassengerTfActionPerformed
+
+    private void AirplaneBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirplaneBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AirplaneBoxActionPerformed
+
+    private void CrewMemberAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrewMemberAddButtonActionPerformed
+        String name = CrewMemberNameTF.getText();
+        String passportId = CrewMemberPassportNumberTF.getText();
+        String nationality = CrewMemberNationalityComboBox.getSelectedItem().toString();
+        String gender="";
+        String role="";
+        
+        int selectedRowIndex=FlightBox.getSelectedIndex();
+        String flight_id=FlightBoxPassenger.getItemAt(selectedRowIndex);
+        
+        if(CrewMemberMaleRadioButton.isSelected()){
+            gender="Male";
+        }
+        else{
+            gender="Female";
+        }
+        
+        if(PilotRadioButton.isSelected()){
+            role= "Pilot";
+        }
+        else{
+            role= "Attendent";
+        }
+        
+        if(name.isEmpty()||nationality.isEmpty()||gender.isEmpty()||passportId.isEmpty()||role.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            return;
+        }
+        else if(selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "No Flight is selceted!");
+            return;
+        }
+        else if(isPurelyNumeric(name)){
+            JOptionPane.showMessageDialog(this, "name cannot be numbers only!");
+            return;
+        }
+        else{
+            Flight flights = airport.Flight_By_ID(flight_id);
+            
+            if(flights.TestDuplicateCrewmemberID(passportId)){
+                JOptionPane.showMessageDialog(this, "Cant have duplicate ID!");
+                return;
+            }
+            
+            CrewMember crewMember = new CrewMember(role,name,passportId,nationality,gender);
+            flights.addCrewMembers(crewMember);
+            
+            if(role.equals("Pilot")){
+                flights.CalculateCurrentPilots();
+            }
+            else{
+                flights.CalculateCurrentAttendants();
+            }
+            
+            if(flights.Calculate_MaxAttendants()<flights.getCurrent_attendants()){
+                JOptionPane.showMessageDialog(this, "Reached max attendants on this flight!");
+                flights.removeCrewMember(crewMember);
+                flights.setCurrent_attendants(flights.getCurrent_attendants()-1);
+                return;
+            }
+            
+            if(flights.max_pilots<flights.getCurrent_pilots()){
+                JOptionPane.showMessageDialog(this, "Reached max pilots on this flight!");
+                flights.removeCrewMember(crewMember);
+                flights.setCurrent_pilots(flights.getCurrent_pilots()-1);
+                return;
+            }
+            
+            DefaultTableModel crewTable = (DefaultTableModel) CrewMemberInfoTable.getModel();
+            crewTable.addRow(new Object[]{name,nationality,passportId,gender,role,flights.getFlight_id()});
+            
+            CrewMemberNameTF.setText("");
+            CrewMemberPassportNumberTF.setText("");
+            CrewMemberNationalityComboBox.setSelectedIndex(0);
+            Gender_Group_C.clearSelection();
+            Role_Group.clearSelection();
+      }
+
+    }//GEN-LAST:event_CrewMemberAddButtonActionPerformed
+
+    private void CrewMemberRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrewMemberRemoveButtonActionPerformed
+        DefaultTableModel tableModel = (DefaultTableModel) CrewMemberInfoTable.getModel();
+        int selectedRowIndex = CrewMemberInfoTable.getSelectedRow();
+        String flight_id=(String) tableModel.getValueAt(selectedRowIndex, 5);
+        
+        if(selectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "No Row selected!");
+        }
+        else{
+            Flight flights=airport.Flight_By_ID(flight_id);
+            String role=(String) tableModel.getValueAt(selectedRowIndex, 4);
+            if(role.equals("Pilot")){
+                int c=flights.getCurrent_pilots()-1;
+                flights.setCurrent_pilots(c);
+            }
+            else{
+                int c=flights.getCurrent_attendants()-1;
+                flights.setCurrent_attendants(c);
+            }
+            
+            tableModel.removeRow(selectedRowIndex);
+            CrewMember crewmember=flights.Crewmember_By_ID(flight_id);
+            flights.removeCrewMember(crewmember);
+            System.out.println(flights.toString());
+            JOptionPane.showMessageDialog(this, "Crew Member removed successfully.");
+        }
+    }//GEN-LAST:event_CrewMemberRemoveButtonActionPerformed
+
+    private void CrewMemberNameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrewMemberNameTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CrewMemberNameTFActionPerformed
+
+    private void PassengerRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassengerRemoveActionPerformed
+        DefaultTableModel tableModel = (DefaultTableModel) DisplayPassengerTable.getModel();
+        int selectedRowIndex = DisplayPassengerTable.getSelectedRow();
+        String flight_id=(String) tableModel.getValueAt(selectedRowIndex, 5);
+        
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "No Row selected!");
+        } else {
+            Flight flights=airport.Flight_By_ID(flight_id);
+            int p=flights.getCurrent_passengers()-1;
+            flights.setCurrent_passengers(p);
+            Passenger passenger=flights.Passenger_By_ID(flight_id);
+            flights.removePassenger(passenger);
+            tableModel.removeRow(selectedRowIndex);
+            JOptionPane.showMessageDialog(this, "Passenger removed successfully.");
+        }
+    }//GEN-LAST:event_PassengerRemoveActionPerformed
+
+    private void YesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesButtonActionPerformed
+        DisabilityTF.setEnabled(true);
+    }//GEN-LAST:event_YesButtonActionPerformed
+
+    private void NoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoButtonActionPerformed
+       DisabilityTF.setEnabled(false);
+       DisabilityTF.setText("");
+    }//GEN-LAST:event_NoButtonActionPerformed
+
+    private void DisabilityTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisabilityTFActionPerformed
+        
+    }//GEN-LAST:event_DisabilityTFActionPerformed
+    private boolean isPurelyNumeric(String str) {
+        return str.matches("^[0-9]+$"); 
+    }
      
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -433,11 +1320,8 @@ public class DashBoard extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {              
+            UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -462,24 +1346,67 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JButton AddAirplane;
     private javax.swing.JButton AddFlight;
     private javax.swing.JTextField AirlineTF;
+    private javax.swing.JComboBox<String> AirplaneBox;
     private javax.swing.JTextField AirplaneCodeTF;
-    private javax.swing.JTable AirplaneTABLE;
-    private javax.swing.JTextField DepartureTimeTF;
-    private javax.swing.JTextField DestinationTF;
+    private javax.swing.JButton AirplaneRemove;
+    private javax.swing.JRadioButton AttendentRadioButton;
+    private javax.swing.JButton CrewMemberAddButton;
+    private javax.swing.JRadioButton CrewMemberFemaleRadioButton;
+    private javax.swing.JTable CrewMemberInfoTable;
+    private javax.swing.JRadioButton CrewMemberMaleRadioButton;
+    private javax.swing.JTextField CrewMemberNameTF;
+    private javax.swing.JComboBox<String> CrewMemberNationalityComboBox;
+    private javax.swing.JTextField CrewMemberPassportNumberTF;
+    private javax.swing.JButton CrewMemberRemoveButton;
+    private javax.swing.JComboBox<String> DepartureTimeBox;
+    private javax.swing.JComboBox<String> DestinationBox;
+    private javax.swing.JTextField DisabilityTF;
+    private javax.swing.ButtonGroup Disability_Group;
     private javax.swing.JTable DisplayAirplaneTable;
+    private javax.swing.JTable DisplayPassengerTable;
+    private javax.swing.JRadioButton Female;
     private javax.swing.JTextField FilghtIDTF;
+    private javax.swing.JComboBox<String> FlightBox;
+    private javax.swing.JComboBox<String> FlightBoxPassenger;
     private javax.swing.JTable FlightTABLE;
+    private javax.swing.ButtonGroup Gender_Group_C;
+    private javax.swing.ButtonGroup Gender_Group_P;
+    private javax.swing.JRadioButton Male;
     private javax.swing.JTextField ModelTF;
+    private javax.swing.JTextField NameOfPassengerTf;
+    private javax.swing.JComboBox<String> NationalityChooser;
     private javax.swing.JTextField NbOfSeatsTF;
-    private javax.swing.JButton RemoveAirplane;
+    private javax.swing.JRadioButton NoButton;
+    private javax.swing.JButton PassengerAdd;
+    private javax.swing.JButton PassengerRemove;
+    private javax.swing.JTextField PassportOfPassengerTf;
+    private javax.swing.JRadioButton PilotRadioButton;
     private javax.swing.JButton RemoveFlight;
+    private javax.swing.ButtonGroup Role_Group;
+    private javax.swing.JComboBox<String> TravelClassChooser;
+    private javax.swing.JRadioButton YesButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -487,6 +1414,7 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
