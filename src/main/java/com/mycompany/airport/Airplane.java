@@ -2,33 +2,36 @@ package com.mycompany.airport;
 
 public class Airplane {
     private String model;
-    private final int seats;
+    private int seats;
     private String airline;
-    private int airplaneNumber; //1 2 3 4 5
+    private String airplaneCode;
+    private boolean available;
 
-    public int getAirplaneNumber() {
-        return airplaneNumber;
-    }
-
-    public void setAirplaneNumber(int airplaneNumber) {
-        this.airplaneNumber = airplaneNumber;
+    public Airplane(String model, int seats, String airline,String Code,boolean available) {
+        this.model = model;
+        this.seats = seats;
+        this.airline = airline;
+        this.airplaneCode=Code;
+        this.available = available;
     }
     
-    public Airplane(){
-        seats=120;
+    public boolean isAvailable() {
+        return available;
     }
-    public void setModel(String model){
-        this.model=model;
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
-    public String getModel(){
-        return model;
+
+    public String getAirplaneCode() {
+        return airplaneCode;
     }
-    public void setAirline(String airline){
-        this.airline=airline;
+    
+
+    public int getSeats() {
+        return seats;
     }
-    public String getAirline(){
-        return airline;
-    }
+
     @Override
     public String toString(){
         return" has Model: "+model+" , Airline: "+airline+" , Seats: "+seats; 
