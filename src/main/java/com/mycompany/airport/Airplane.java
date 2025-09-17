@@ -26,7 +26,7 @@ public class Airplane {
     public String getAirplaneCode() {
         return airplaneCode;
     }
-
+    
 
     public int getSeats() {
         return seats;

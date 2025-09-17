@@ -15,4 +15,11 @@ public abstract class Person {
     public String getId_Card(){
         return id_card;
     }
+    public abstract void setEmergencyState();
+
+    @Override
+    public String toString() {
+        return "Person{" + "name=" + name + ", id_card=" + id_card + ", nationality=" + nationality + ", gender=" + gender + '}';
+    }
+    
 }

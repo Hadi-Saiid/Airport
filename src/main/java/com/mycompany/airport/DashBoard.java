@@ -710,13 +710,13 @@ public class DashBoard extends javax.swing.JFrame {
         DefaultTableModel tableModel=(DefaultTableModel)DisplayAirplaneTable.getModel();
         
         int selectedRowIndex=DisplayAirplaneTable.getSelectedRow();
-        Airplane airplane=airport.getAirplaneIndex(selectedRowIndex);
+        
         
         if(selectedRowIndex<0){
             JOptionPane.showMessageDialog(this, "No Row selected!");
             return;
         }
-        
+        Airplane airplane=airport.getAirplaneIndex(selectedRowIndex);
         if(!airplane.isAvailable()){
             JOptionPane.showMessageDialog(this, "Airplane is assigned to a Flight!");
             return;
@@ -747,14 +747,27 @@ public class DashBoard extends javax.swing.JFrame {
            return;
         }
         
+        
         try {
-            if(Integer.parseInt(NbOfSeatsTF.getText())<0){
-                JOptionPane.showMessageDialog(this, "Number of seats must be a valid number.");
+            if(Integer.parseInt(NbOfSeatsTF.getText())>200){
+                JOptionPane.showMessageDialog(this, "The max number of seats must be at most 200.");
+                return;
+            }
+            if(Integer.parseInt(NbOfSeatsTF.getText())<=0){
+                JOptionPane.showMessageDialog(this, "Number of seats must be a valid number!");
+                return;
+            }
+            if(Integer.parseInt(NbOfSeatsTF.getText())<4){
+                JOptionPane.showMessageDialog(this, "Number of seats must be at least 4.");
                 return;
             }
             
             if(airport.TestDuplicateAirplaneID(airplaneCode)){
                 JOptionPane.showMessageDialog(this, "Airplane Code is already used!");
+                return;
+            }
+            if(airport.Test_MaxAirplanes()){
+                JOptionPane.showMessageDialog(this, "Max airplane reached!");
                 return;
             }
             
@@ -784,15 +797,16 @@ public class DashBoard extends javax.swing.JFrame {
         DefaultTableModel passengerTable = (DefaultTableModel) DisplayPassengerTable.getModel();
         
         int selectedRowIndex=FlightTABLE.getSelectedRow();
-        Flight flight=airport.getFlightIndex(selectedRowIndex);
-        String flightID =flight.getFlight_id();
-        Airplane airplane=flight.getAirplane();
+        
         
         if(selectedRowIndex<0){
             JOptionPane.showMessageDialog(this, "No Row selected!");
         }
         else{
-
+            Flight flight=airport.getFlightIndex(selectedRowIndex);
+            String flightID =flight.getFlight_id();
+            Airplane airplane=flight.getAirplane();
+            
             airplane.setAvailable(true);
             
             for (int i = passengerTable.getRowCount() - 1; i >= 0; i--) {
@@ -826,7 +840,7 @@ public class DashBoard extends javax.swing.JFrame {
         String destination=DestinationBox.getSelectedItem().toString();
         
         int selectedRowIndex=AirplaneBox.getSelectedIndex();
-        Airplane airplane =airport.getAirplaneIndex(selectedRowIndex);
+        
         
         if (flight_ID.isEmpty() || departure_Time.isEmpty() ||destination.isEmpty() ) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
@@ -837,7 +851,7 @@ public class DashBoard extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No airplane is selceted!");
             return;
         }
-
+        Airplane airplane =airport.getAirplaneIndex(selectedRowIndex);
         if(!airplane.isAvailable()){
             JOptionPane.showMessageDialog(this, "Airplane is not available!");
             return;
@@ -1250,12 +1264,13 @@ public class DashBoard extends javax.swing.JFrame {
     private void CrewMemberRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrewMemberRemoveButtonActionPerformed
         DefaultTableModel tableModel = (DefaultTableModel) CrewMemberInfoTable.getModel();
         int selectedRowIndex = CrewMemberInfoTable.getSelectedRow();
-        String flight_id=(String) tableModel.getValueAt(selectedRowIndex, 5);
+        
         
         if(selectedRowIndex < 0){
             JOptionPane.showMessageDialog(this, "No Row selected!");
         }
         else{
+            String flight_id=(String) tableModel.getValueAt(selectedRowIndex, 5);
             Flight flights=airport.Flight_By_ID(flight_id);
             String role=(String) tableModel.getValueAt(selectedRowIndex, 4);
             if(role.equals("Pilot")){
@@ -1282,11 +1297,11 @@ public class DashBoard extends javax.swing.JFrame {
     private void PassengerRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassengerRemoveActionPerformed
         DefaultTableModel tableModel = (DefaultTableModel) DisplayPassengerTable.getModel();
         int selectedRowIndex = DisplayPassengerTable.getSelectedRow();
-        String flight_id=(String) tableModel.getValueAt(selectedRowIndex, 5);
         
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "No Row selected!");
         } else {
+            String flight_id=(String) tableModel.getValueAt(selectedRowIndex, 5);
             Flight flights=airport.Flight_By_ID(flight_id);
             int p=flights.getCurrent_passengers()-1;
             flights.setCurrent_passengers(p);

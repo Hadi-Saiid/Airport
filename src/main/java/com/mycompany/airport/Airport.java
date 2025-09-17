@@ -7,6 +7,7 @@ public class Airport {
     String name_airport="BHY Airport";
     String country="Lebanon";
     private ArrayList<Airplane> airplanes;
+    private final int max_airplanes=10;
     private ArrayList<Flight> flights;
     
     
@@ -45,7 +46,12 @@ public class Airport {
         }
         return false;
     }
-    
+    public boolean Test_MaxAirplanes(){
+        if(max_airplanes<=airplanes.size()){
+            return true;
+        }
+        return false;
+    }
     
     
     public void addFlight(Flight flight){

@@ -10,6 +10,9 @@ public class Passenger extends Person{
         this.disabilityType=disabilityType;
         this.isDisabled=isDisabled;
     }
+    public  void setEmergencyState(){
+        System.out.println("Please MS"+super.name+" stay calm and get access to the oxygen mask");
+    }
 
     @Override
     public String toString() {
